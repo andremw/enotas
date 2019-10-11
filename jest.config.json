@@ -1,0 +1,15 @@
+{
+    "roots": ["<rootDir>/test"],
+    "transform": {
+        "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "(.*|(\\.|/)(test|spec))\\.ts$",
+    "moduleFileExtensions": ["ts", "js"],
+    "collectCoverageFrom": ["**/*.ts"],
+    "coverageReporters": ["html", "lcov", "text"],
+    "globals": {
+        "ts-jest": {
+            "disableSourceMapSupport": true
+        }
+    }
+}
