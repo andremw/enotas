@@ -1,6 +1,8 @@
 import got from 'got';
 
-import { reject, isNil } from 'ramda';
+import { reject, isNil, join } from 'ramda';
+
+import { ISale } from './types';
 
 const withoutUndefined = reject(isNil);
 const apiUrl = 'https://app.enotas.com.br/api';
@@ -37,8 +39,26 @@ const enotas = ({ apiKey }: { readonly apiKey: string } = { apiKey: '' }) => {
       return gotClient.get('/vendas/getFilterBy', {
         query
       });
+    },
+    createSale: (sale: ISale) => {
+      return gotClient.post('/vendas', {
+        body: mapSale(sale)
+      });
     }
   };
 };
+
+const joinWithSemicolon = join(';');
+
+function mapSale(sale: ISale): object {
+  return {
+    ...sale,
+    produto: {
+      ...sale.produto,
+      tags: joinWithSemicolon(sale.produto.tags)
+    },
+    tags: joinWithSemicolon(sale.tags || [])
+  };
+}
 
 export default enotas;
