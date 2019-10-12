@@ -90,3 +90,5 @@ const mapSale = (sale: Sale): object => ({
 
 export const createSale = (api: ApiInstance) => (sale: Sale): got.GotPromise<object> =>
   api.post('/vendas', { body: mapSale(sale) });
+
+export const cancelSale = (api: ApiInstance) => (saleId: string) => api.post(`/vendas/${saleId}/cancelar`);

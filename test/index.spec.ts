@@ -1,18 +1,23 @@
-import { getSales, createSale, ApiInstance, WhenToIssueReceipt, PaymentMethod } from '../src/index';
+import { getSales, createSale, cancelSale, ApiInstance, WhenToIssueReceipt, PaymentMethod } from '../src/index';
 
 describe('eNotas API Wrapper', () => {
+  let api: ApiInstance;
+
+  beforeEach(() => {
+    api = ({
+      get: jest.fn(),
+      post: jest.fn(),
+    } as unknown) as ApiInstance;
+  });
+
   describe('Sales requests', () => {
-    it('GET sales passing query string params', async () => {
+    it('GET /sales/getFilterBy passing query string params', async () => {
       const qs = {
         filter: 'data eq "2018-01-01" AND nfe/situacao eq "3"',
         pageNumber: 0,
         pageSize: 0,
         orderBy: 0,
       };
-
-      const api = ({
-        get: jest.fn(),
-      } as unknown) as ApiInstance;
 
       await getSales(api)(qs);
 
@@ -22,10 +27,6 @@ describe('eNotas API Wrapper', () => {
     });
 
     it('POST to create a sale', async () => {
-      const api = ({
-        post: jest.fn(),
-      } as unknown) as ApiInstance;
-
       const postBody = {
         cliente: {
           id: 'client-id',
@@ -75,6 +76,11 @@ describe('eNotas API Wrapper', () => {
           tags: 'exemplodevenda;exemplodetag2',
         },
       });
+    });
+
+    it('POST /vendas/{vendaId}/cancelar to cancel a sale', async () => {
+      await cancelSale(api)('1234');
+      expect(api.post).toHaveBeenCalledWith('/vendas/1234/cancelar');
     });
   });
 });
