@@ -1,9 +1,30 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {},
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-immutable"
+  ],
+  "jsRules": {},
+  "rules": {
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-boolean-literal-compare": true,
+    // Recommended built-in rules
+    "no-var-keyword": true,
+    "no-parameter-reassignment": true,
+    "typedef": [true, "call-signature"],
+    // Immutability rules
+    "readonly-keyword": true,
+    "readonly-array": true,
+    "no-let": true,
+    "no-object-mutation": true,
+    "no-delete": true,
+    "no-method-signature": true,
+    // Functional style rules
+    "no-this": true,
+    "no-class": true,
+    "no-loop-statement": true
+  },
+  "rulesDirectory": []
 }
