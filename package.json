@@ -7,7 +7,7 @@
   "author": "André <mazoni.andre@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
     "build": "tsc"
   },
@@ -29,9 +29,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
     "got": "^9.6.0",
     "ramda": "^0.26.1"
   }
