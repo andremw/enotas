@@ -6,5 +6,5 @@ module.exports = {
     testPathIgnorePatterns: ['/lib/', '/node_modules/'],
     moduleFileExtensions: ['ts', 'js', 'json'],
     collectCoverage: true,
-    coverageReporters: ['html', 'lcov', 'text'],
+    coverageReporters: ['html', 'lcov', 'json', 'text'],
 };

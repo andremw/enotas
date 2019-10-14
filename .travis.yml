@@ -8,7 +8,10 @@ matrix:
   - node_js: '8'
 install:
   - yarn
+  - yarn add global codecov
 script:
   - yarn test
   - yarn lint
-  - yarn typecheck
+  - yarn build --sourcemap
+after_success:
+  - codecov -f ./coverage/coverage-final.json
