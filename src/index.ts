@@ -48,12 +48,17 @@ type Sale = {
 
 declare type ApiInstance = got.GotInstance<got.GotJSONFn>;
 
-export const getSales = (api: ApiInstance) => ({ filter, pageNumber, pageSize, orderBy }: SalesParams) => {
+export const getSales = (api: ApiInstance) => ({
+  filter,
+  pageNumber,
+  pageSize,
+  orderBy,
+}: SalesParams): got.GotPromise<object> => {
   const query = withoutUndefined({ filter, pageNumber, pageSize, orderBy });
   return api.get('/vendas/getFilterBy', { query });
 };
 
-const mapSale = (sale: Sale) => ({
+const mapSale = (sale: Sale): object => ({
   ...sale,
   produto: {
     ...sale.produto,
@@ -62,5 +67,5 @@ const mapSale = (sale: Sale) => ({
   tags: joinWithSemicolon(sale.tags || []),
 });
 
-export const createSale = (api: got.GotInstance<got.GotJSONFn>) => (sale: Sale) =>
+export const createSale = (api: got.GotInstance<got.GotJSONFn>) => (sale: Sale): got.GotPromise<object> =>
   api.post('/vendas', { body: mapSale(sale) });
