@@ -1,4 +1,4 @@
-import { getSales, createSale, ApiInstance } from '../src/index';
+import { getSales, createSale, ApiInstance, WhenToIssueReceipt, PaymentMethod } from '../src/index';
 
 describe('eNotas API Wrapper', () => {
   describe('Sales requests', () => {
@@ -40,9 +40,9 @@ describe('eNotas API Wrapper', () => {
           tags: ['adestramento'],
         },
         valorTotal: 5990,
-        quandoEmitirNFe: 1,
+        quandoEmitirNFe: WhenToIssueReceipt.AposGarantia,
         enviarNFeCliente: true,
-        meioPagamento: 2,
+        meioPagamento: PaymentMethod.CartaoCredito,
         tags: ['exemplodevenda', 'exemplodetag2'],
         municipioPrestacao: {
           nome: 'Belo Horizonte',

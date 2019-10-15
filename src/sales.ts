@@ -10,6 +10,28 @@ type SalesParams = {
   readonly orderBy?: number;
 };
 
+export enum WhenToIssueReceipt {
+  // the receipt goes to issuing process right away
+  AposVenda = 0,
+
+  // the receipt goes to issuing process in the due date (property "vencimento")
+  AposGarantia = 1,
+
+  // the receipt will not be issued automatically, but only after a manual trigger
+  NaoEmitir = 2,
+}
+
+export enum PaymentMethod {
+  NaoInformado = 0,
+  BoletoBancario = 1,
+  CartaoCredito = 2,
+  Deposito = 3,
+  TransferenciaBancaria = 4,
+  BCash = 5,
+  PayPal = 6,
+  Outro = 7,
+}
+
 type Sale = {
   readonly cliente?: {
     readonly id: string;
@@ -24,9 +46,9 @@ type Sale = {
     readonly tags: readonly string[];
   };
   readonly valorTotal: number;
-  readonly quandoEmitirNFe?: number;
+  readonly quandoEmitirNFe?: WhenToIssueReceipt;
   readonly enviarNFeCliente?: boolean;
-  readonly meioPagamento?: number;
+  readonly meioPagamento?: PaymentMethod;
   readonly tags?: readonly string[];
   readonly municipioPrestacao?: {
     readonly nome?: string;
