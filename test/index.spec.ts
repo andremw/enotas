@@ -1,8 +1,4 @@
-import { GotInstance, GotJSONFn } from 'got';
-
-import { getSales, createSale } from '../src/index';
-
-declare type ApiInstance = GotInstance<GotJSONFn>;
+import { getSales, createSale, ApiInstance } from '../src/index';
 
 describe('eNotas API Wrapper', () => {
   describe('Sales requests', () => {
