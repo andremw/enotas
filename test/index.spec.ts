@@ -79,8 +79,9 @@ describe('eNotas API Wrapper', () => {
     });
 
     it('POST /vendas/{vendaId}/cancelar to cancel a sale', async () => {
-      await cancelSale(api)('1234');
-      expect(api.post).toHaveBeenCalledWith('/vendas/1234/cancelar');
+      const fakeId = '1234';
+      await cancelSale(api)(fakeId);
+      expect(api.post).toHaveBeenCalledWith(`/vendas/${fakeId}/cancelar`);
     });
   });
 });
