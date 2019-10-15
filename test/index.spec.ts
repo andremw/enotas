@@ -26,7 +26,7 @@ describe('eNotas API Wrapper', () => {
         post: jest.fn(),
       } as unknown) as ApiInstance;
 
-      await createSale(api)({
+      const postBody = {
         cliente: {
           id: 'client-id',
         },
@@ -61,44 +61,18 @@ describe('eNotas API Wrapper', () => {
         porcentagemInss: 3,
         porcentagemIr: 4.3,
         porcentagemPis: 5,
-      });
+      };
+
+      await createSale(api)(postBody);
 
       expect(api.post).toHaveBeenCalledWith('/vendas', {
         body: {
-          cliente: {
-            id: 'client-id',
-          },
-          data: '31/08/2016',
-          vencimento: '10/09/2016',
+          ...postBody,
           produto: {
-            nome: 'Como adestrar cachorros',
-            idExterno: '324',
-            valorTotal: 29,
-            diasGarantia: 30,
+            ...postBody.produto,
             tags: 'adestramento',
           },
-          valorTotal: 5990,
-          quandoEmitirNFe: 1,
-          enviarNFeCliente: true,
-          meioPagamento: 2,
           tags: 'exemplodevenda;exemplodetag2',
-          municipioPrestacao: {
-            nome: 'Belo Horizonte',
-            codigoIbge: 3106200,
-          },
-          dataCompetencia: '10/09/2016',
-          discriminacao: 'Consultoria Financeira Master',
-          valorTotalNFe: 5990,
-          aliquotaIss: 0,
-          valorIss: 0,
-          issRetidoFonte: false,
-          deducoes: 0,
-          observacoes: '',
-          porcentagemCofins: 1.5,
-          porcentagemCsll: 2.2,
-          porcentagemInss: 3,
-          porcentagemIr: 4.3,
-          porcentagemPis: 5,
         },
       });
     });
