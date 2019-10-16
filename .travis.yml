@@ -14,7 +14,7 @@ script:
   - yarn test
   - yarn lint
   - yarn build --sourcemap
-  - cd docs/website && yarn build
+  - cd docs/website && yarn && yarn build
 after_success:
   - codecov -f ./coverage/coverage-final.json
 # deploy:
