@@ -9,6 +9,7 @@ matrix:
 install:
   - yarn
   - yarn add global codecov
+  - yarn add global docusaurus-build
 script:
   - yarn test
   - yarn lint
