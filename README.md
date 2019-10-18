@@ -3,7 +3,7 @@
 A functional Nodejs Wrapper for eNotas API
 
 # Contributing 
-You should create a fork of this repo, and open a Pull Request suppling our code pattern and contributers guide. You could find issues in our issues tab on github, if you make a improvement (non-issued PR) please create an issue reporting what you want to improve and link to your PR.
+You should create a fork of this repo, and open a Pull Request (according to?) our code pattern and contributors guide. If you want to make an improvement (non-issued PR) please create an issue reporting what you want to improve and link to your PR.
 
 # Documentation
 You could find everything that you need here: *future link*
