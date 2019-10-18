@@ -9,9 +9,18 @@ matrix:
 install:
   - yarn
   - yarn add global codecov
+  - yarn add global docusaurus-init
 script:
   - yarn test
   - yarn lint
   - yarn build --sourcemap
+  - cd docs/website && yarn && yarn build
 after_success:
   - codecov -f ./coverage/coverage-final.json
+# deploy:
+#   - provider: github
+#     skip_cleanup: true
+#     keep_history: true
+#     local_dir: docs/website/build/enotas
+#     on:
+#       branch: master
