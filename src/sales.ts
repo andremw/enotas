@@ -1,4 +1,5 @@
 import got from 'got';
+import { evolve } from 'ramda';
 
 import { ApiInstance } from './index';
 import { joinWithSemicolon, withoutUndefined } from './util';
@@ -79,14 +80,14 @@ export const getSales = (api: ApiInstance) => ({
   return api.get('/vendas/getFilterBy', { query });
 };
 
-const mapSale = (sale: Sale): object => ({
-  ...sale,
+const mapSale = evolve({
   produto: {
-    ...sale.produto,
-    tags: joinWithSemicolon(sale.produto.tags),
+    tags: joinWithSemicolon,
   },
-  tags: joinWithSemicolon(sale.tags || []),
+  tags: joinWithSemicolon,
 });
 
 export const createSale = (api: ApiInstance) => (sale: Sale): got.GotPromise<object> =>
   api.post('/vendas', { body: mapSale(sale) });
+
+export const cancelSale = (api: ApiInstance) => (saleId: string) => api.post(`/vendas/${saleId}/cancelar`);
