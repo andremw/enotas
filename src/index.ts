@@ -1,5 +1,4 @@
-import got from 'got';
-
+export * from './_generic/api';
+export * from './_generic/types';
 export * from './sales';
-
-export declare type ApiInstance = got.GotInstance<got.GotJSONFn>;
+export * from './customer';
