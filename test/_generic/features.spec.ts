@@ -22,7 +22,7 @@ describe('Generic Features', () => {
 
   it('should construct getFeature correctly', () => {
     const fakeReturn = 'getResponse';
-    const fakeId = 1;
+    const fakeId = '1';
     const mock = jest.fn().mockReturnValue(fakeReturn);
     const feature = getFeature(fakeApiUri)(fakeApi);
 
