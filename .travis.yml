@@ -1,26 +1,43 @@
 language: node_js
 cache: yarn
-
-matrix:
-  include:
-  - node_js: '12'
-  - node_js: '10'
-  - node_js: '8'
 install:
   - yarn
   - yarn add global codecov
   - yarn add global docusaurus-init
-script:
-  - yarn test
-  - yarn lint
-  - yarn build --sourcemap
-  - cd docs/website && yarn && yarn build
-after_success:
-  - codecov -f ./coverage/coverage-final.json
-# deploy:
-#   - provider: github
-#     skip_cleanup: true
-#     keep_history: true
-#     local_dir: docs/website/build/enotas
-#     on:
-#       branch: master
+jobs:
+  include:
+    - stage: test
+      node_js: '12'
+      script:
+        - yarn test
+        - yarn lint
+        - yarn typecheck
+    - stage: test
+      node_js: '10'
+      script:
+        - yarn test
+        - yarn lint
+        - yarn typecheck
+    - stage: test
+      node_js: '8'
+      script:
+        - yarn test
+        - yarn lint
+        - yarn typecheck
+    - stage: deploy
+      node_js: '10'
+      script:
+        - yarn test
+        - yarn build --sourcemap
+        - cd docs/website && yarn && yarn build
+      after_success:
+        - codecov -f ./coverage/coverage-final.json
+      deploy:
+        - provider: pages
+          skip_cleanup: true
+          keep_history: true
+          github_token:
+            secure: d1FSE0lwMDaYnhcT8tMt8VZxcQLa83+LsA+HhA4a3vuXlLl1gAbDqL2fPgE3mZU44jaI+2SG7waCYg8m7OswdG/g9/hVYMKmVfsAeGsc8a0ZGECdsdgSvFt1gP1F18dwIljigebEdLdGQC6WgsSGVlaBXl+x/xtPnKsBg9CxwUlkRhnA6uguUAo1Kj6BDmW2eBu10R5pDK/50G+ujHyl5vn5AmmIwLwMoly5uzctHcDLjIGPN9HgDAX6rkUbBZxC35TFvazrixgQQjDQkdc3J1x/DzMx7g5zr00CP2bj6r73lFwib5IkffJznDjASmFBPgipE5w4XbhVNs3m7V+LfKawx+z4Qa7sWm8PeBzXubBVmUijRTv7Sevgf1R2G/csC8k9P8Oj5hhLpuse6BMwiRZyzv6xjmx/fZiFoC1SRWwKD3RJrd0x6vIZI1hGoz+7eoS5liqkHCVAYJvYYnKa4vo3WNj9+XRjj+SZkLwI8EP+psELN/HGFOQjg1mIfBjdQIjhhQmGJy+nVNDs042g9aEoD3lwnsTG86wRTE27af7Y8QjcS1EiHvNJAm7W4K5UrpWEbHLLZdRvNabMw49X3TWliXN9WrtRONRah5JUQfr8fm2sHedRBZUxVatZ5qN3URmurLaThheOOZBvWtXMTRaAZTw0F35X6mLHhcvEXoE=
+          local_dir: docs/website/build/enotas
+          on:
+            branch: master
