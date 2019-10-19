@@ -1,4 +1,5 @@
-import { getSales, createSale, cancelSale, ApiInstance, WhenToIssueReceipt, PaymentMethod } from '../src/index';
+import { getSales, createSale, cancelSale, ApiInstance } from '../src/index';
+import { WhenToIssueReceipt, PaymentMethod } from '../src/sales/types';
 
 describe('eNotas API Wrapper', () => {
   let api: ApiInstance;
