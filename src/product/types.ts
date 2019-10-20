@@ -15,6 +15,6 @@ export type Product = {
   readonly produtoId?: string;
 };
 
-export type CustomerListType = (api: ApiInstance) => (query: FilterParams) => GotPromise<Product[]>;
-export type CustomerGetType = (api: ApiInstance) => (id: string) => GotPromise<Product>;
-export type CustomerCreateType = (api: ApiInstance) => (body: Product) => GotPromise<Product>;
+export type ProductListType = (api: ApiInstance) => (query: FilterParams) => GotPromise<Product[]>;
+export type ProductGetType = (api: ApiInstance) => (id: string) => GotPromise<Product>;
+export type ProductCreateType = (api: ApiInstance) => (body: Product) => GotPromise<Product>;
