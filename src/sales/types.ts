@@ -1,13 +1,6 @@
 import { ApiInstance, FilterParams } from '../_generic/types';
 import { GotPromise } from 'got';
 
-export type SalesParams = {
-  readonly filter?: string;
-  readonly pageNumber?: number;
-  readonly pageSize?: number;
-  readonly orderBy?: number;
-};
-
 export enum WhenToIssueReceipt {
   // the receipt goes to issuing process right away
   AposVenda = 0,
