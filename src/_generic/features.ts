@@ -1,6 +1,8 @@
+import { GotPromise } from 'got';
+import { identity } from 'ramda';
+
 import { ApiInstance, FilterParams } from './types';
 import { createQueryObject } from '../util';
-import { GotPromise } from 'got';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const listFeature = (apiUrl: string) => (api: ApiInstance) => (query?: FilterParams): GotPromise<any> =>
@@ -11,5 +13,9 @@ export const getFeature = (apiUrl: string) => (api: ApiInstance) => (id: string)
   api.get(`${apiUrl}/${id}`);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createFeature = (apiUrl: string) => (api: ApiInstance) => (body: any): GotPromise<any> =>
-  api.post(apiUrl, { body });
+export const createFeature = (apiUrl: string, mapper: (obj: any) => any = identity) => (api: ApiInstance) => (
+  body: any,
+): GotPromise<any> => api.post(apiUrl, { body: mapper(body) });
+
+export const cancelFeature = (apiUrl: string) => (api: ApiInstance) => (id: string) =>
+  api.post(`${apiUrl}/${id}/cancelar`);

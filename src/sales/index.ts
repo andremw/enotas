@@ -1,28 +1,10 @@
-import got from 'got';
-import { evolve } from 'ramda';
+import { SaleListType, SaleGetType, SaleCreateType, SaleCancelType } from './types';
+import { listFeature, getFeature, createFeature, cancelFeature } from '../_generic/features';
+import { mapSale } from './util';
 
-import { ApiInstance } from '../index';
-import { joinWithSemicolon, withoutUndefined } from '../util';
-import { SalesParams, Sale } from './types';
+const API_URL = '/vendas';
 
-export const getSales = (api: ApiInstance) => ({
-  filter,
-  pageNumber,
-  pageSize,
-  orderBy,
-}: SalesParams): got.GotPromise<object> => {
-  const query = withoutUndefined({ filter, pageNumber, pageSize, orderBy });
-  return api.get('/vendas/getFilterBy', { query });
-};
-
-const mapSale = evolve({
-  produto: {
-    tags: joinWithSemicolon,
-  },
-  tags: joinWithSemicolon,
-});
-
-export const createSale = (api: ApiInstance) => (sale: Sale): got.GotPromise<object> =>
-  api.post('/vendas', { body: mapSale(sale) });
-
-export const cancelSale = (api: ApiInstance) => (saleId: string) => api.post(`/vendas/${saleId}/cancelar`);
+export const listSales: SaleListType = listFeature(API_URL);
+export const getSale: SaleGetType = getFeature(API_URL);
+export const createSale: SaleCreateType = createFeature(API_URL, mapSale);
+export const cancelSale: SaleCancelType = cancelFeature(API_URL);

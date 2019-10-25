@@ -1,3 +1,6 @@
+import { ApiInstance, FilterParams } from '../_generic/types';
+import { GotPromise } from 'got';
+
 export type SalesParams = {
   readonly filter?: string;
   readonly pageNumber?: number;
@@ -63,3 +66,10 @@ export type Sale = {
   readonly porcentagemIr?: number;
   readonly porcentagemPis?: number;
 };
+
+type SalesMapper = (sale: Sale) => object;
+
+export type SaleListType = (api: ApiInstance) => (query: FilterParams) => GotPromise<Sale[]>;
+export type SaleGetType = (api: ApiInstance) => (id: string) => GotPromise<Sale>;
+export type SaleCreateType = (api: ApiInstance) => (body: Sale, mapper?: SalesMapper) => GotPromise<Sale>;
+export type SaleCancelType = (api: ApiInstance) => (id: string) => GotPromise<Sale>;

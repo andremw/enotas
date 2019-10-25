@@ -1,4 +1,4 @@
-import { listFeature, getFeature, createFeature } from '../../src/_generic/features';
+import { listFeature, getFeature, createFeature, cancelFeature } from '../../src/_generic/features';
 import { ApiInstance } from '../../src';
 
 describe('Generic Features', () => {
@@ -9,7 +9,7 @@ describe('Generic Features', () => {
     jest.resetAllMocks();
   });
 
-  it('should construct listFeature correctly', () => {
+  it('constructs listFeature correctly', () => {
     const fakeReturn = 'listResponse';
     const mock = jest.fn().mockReturnValue(fakeReturn);
     const feature = listFeature(fakeApiUri)(fakeApi);
@@ -20,7 +20,7 @@ describe('Generic Features', () => {
     expect(mock).toBeCalledWith(`${fakeApiUri}/getFilterBy`, { query: {} });
   });
 
-  it('should construct getFeature correctly', () => {
+  it('constructs getFeature correctly', () => {
     const fakeReturn = 'getResponse';
     const fakeId = '1';
     const mock = jest.fn().mockReturnValue(fakeReturn);
@@ -32,7 +32,7 @@ describe('Generic Features', () => {
     expect(mock).toBeCalledWith(`${fakeApiUri}/${fakeId}`);
   });
 
-  it('should construct createFeature correctly', () => {
+  it('constructs createFeature correctly', () => {
     const fakeReturn = 'createResponse';
     const mock = jest.fn().mockReturnValue(fakeReturn);
     const feature = createFeature(fakeApiUri)(fakeApi);
@@ -42,5 +42,17 @@ describe('Generic Features', () => {
 
     expect(feature(fakeBody)).toBe(fakeReturn);
     expect(mock).toBeCalledWith(`${fakeApiUri}`, { body: fakeBody });
+  });
+
+  it('constructs cancelFeature correctly', () => {
+    const fakeReturn = 'cancelResponse';
+    const fakeId = '1';
+    const mock = jest.fn().mockReturnValue(fakeReturn);
+    const feature = cancelFeature(fakeApiUri)(fakeApi);
+
+    fakeApi['post'] = mock;
+
+    expect(feature(fakeId)).toBe(fakeReturn);
+    expect(mock).toBeCalledWith(`${fakeApiUri}/${fakeId}/cancelar`);
   });
 });
