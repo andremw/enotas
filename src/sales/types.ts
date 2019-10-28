@@ -1,9 +1,5 @@
-export type SalesParams = {
-  readonly filter?: string;
-  readonly pageNumber?: number;
-  readonly pageSize?: number;
-  readonly orderBy?: number;
-};
+import { ApiInstance, FilterParams } from '../_generic/types';
+import { GotPromise } from 'got';
 
 export enum WhenToIssueReceipt {
   // the receipt goes to issuing process right away
@@ -63,3 +59,10 @@ export type Sale = {
   readonly porcentagemIr?: number;
   readonly porcentagemPis?: number;
 };
+
+type SalesMapper = (sale: Sale) => object;
+
+export type SaleListType = (api: ApiInstance) => (query: FilterParams) => GotPromise<Sale[]>;
+export type SaleGetType = (api: ApiInstance) => (id: string) => GotPromise<Sale>;
+export type SaleCreateType = (api: ApiInstance) => (body: Sale, mapper?: SalesMapper) => GotPromise<Sale>;
+export type SaleCancelType = (api: ApiInstance) => (id: string) => GotPromise<Sale>;
