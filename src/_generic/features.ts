@@ -12,8 +12,10 @@ export const listFeature = (apiUrl: string) => (api: ApiInstance) => (query?: Fi
 export const getFeature = (apiUrl: string) => (api: ApiInstance) => (id: string): GotPromise<any> =>
   api.get(`${apiUrl}/${id}`);
 
+type BodyMapper = (obj: object) => object;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createFeature = (apiUrl: string, mapper: (obj: any) => any = identity) => (api: ApiInstance) => (
+export const createFeature = (apiUrl: string, mapper: BodyMapper = identity) => (api: ApiInstance) => (
   body: any,
 ): GotPromise<any> => api.post(apiUrl, { body: mapper(body) });
 
