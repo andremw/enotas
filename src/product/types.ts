@@ -9,12 +9,14 @@ export type Product = {
   readonly idExterno?: string;
   readonly diasGarantia?: number;
   readonly valorTotal?: number;
-  readonly aliquotaIss?: any;
-  readonly discriminacaoServico?: any;
-  readonly tags?: string;
+  readonly aliquotaIss?: number;
+  readonly discriminacaoServico?: string;
+  readonly tags?: readonly string[];
   readonly produtoId?: string;
 };
 
+type ProductMapper = (Product: Product) => object;
+
 export type ProductListType = (api: ApiInstance) => (query: FilterParams) => GotPromise<Product[]>;
 export type ProductGetType = (api: ApiInstance) => (id: string) => GotPromise<Product>;
-export type ProductCreateType = (api: ApiInstance) => (body: Product) => GotPromise<Product>;
+export type ProductCreateType = (api: ApiInstance) => (body: Product, mapper?: ProductMapper) => GotPromise<Product>;
