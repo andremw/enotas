@@ -5,14 +5,14 @@
         <link>https://andremw.github.io/enotas/enotasblog</link>
         <description>The best place to stay up-to-date with the latest eNotas Wrapper news and events.</description>
         <lastBuildDate>Tue, 24 Oct 2017 06:00:00 GMT</lastBuildDate>
-        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-        <generator>Feed for Node.js</generator>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>eNotas Wrapper Blog</title>
             <url>https://andremw.github.io/enotas/enotasimg/favicon.ico</url>
             <link>https://andremw.github.io/enotas/enotasblog</link>
         </image>
-        <copyright>Copyright © 2019 (?)</copyright>
+        <copyright>Copyright © 2020 (?)</copyright>
         <item>
             <title><![CDATA[New Version 1.0.0]]></title>
             <link>https://andremw.github.io/enotas/enotasblog/2017/10/24/new-version-1.0.0.html</link>
